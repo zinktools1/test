@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zink - Login</title>
+    <title>Zink - Sign Up</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
@@ -120,133 +120,97 @@
     <!-- Main Content -->
     <main class="flex-1 flex items-center justify-center p-4">
         <div class="w-full max-w-md">
-            <!-- Login Card -->
+            <!-- Sign Up Card -->
             <div class="bg-card border border-border rounded-lg shadow-lg p-8 theme-transition">
-                <div class="mb-8 text-center">
-                    <h2 class="text-3xl font-bold mb-2">Welcome back</h2>
-                    <p class="text-muted-foreground text-sm">Enter your credentials to sign in to your account</p>
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold mb-2">Get started</h2>
+                    <p class="text-muted-foreground">Create a new account</p>
                 </div>
 
-                <form id="login-form" class="space-y-6">
+                <!-- Continue with GitHub Button -->
+                <button 
+                    type="button"
+                    class="w-full inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-12 px-4 py-2 mb-6 theme-transition"
+                >
+                    <i data-lucide="github" class="w-5 h-5 mr-2"></i>
+                    Continue with GitHub
+                </button>
+
+                <!-- Divider -->
+                <div class="relative mb-6">
+                    <div class="absolute inset-0 flex items-center">
+                        <span class="w-full border-t border-border"></span>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span class="bg-card px-3 text-muted-foreground">or</span>
+                    </div>
+                </div>
+
+                <form id="signup-form" class="space-y-5">
                     <!-- Email Field -->
                     <div class="space-y-2">
-                        <label for="email" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                        <label for="email" class="text-sm font-medium leading-none">
                             Email
                         </label>
-                        <div class="relative">
-                            <div class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
-                                <i data-lucide="mail" class="w-4 h-4"></i>
-                            </div>
-                            <input 
-                                type="email" 
-                                id="email" 
-                                name="email"
-                                class="flex h-10 w-full rounded-md border border-input bg-background pl-10 pr-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 theme-transition"
-                                placeholder="name@example.com"
-                                required
-                            >
-                        </div>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email"
+                            class="flex h-12 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 theme-transition"
+                            placeholder="you@example.com"
+                            required
+                        >
                     </div>
 
                     <!-- Password Field -->
                     <div class="space-y-2">
-                        <div class="flex items-center justify-between">
-                            <label for="password" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                                Password
-                            </label>
-                            <a href="#" class="text-sm text-primary hover:underline">
-                                Forgot password?
-                            </a>
-                        </div>
+                        <label for="password" class="text-sm font-medium leading-none">
+                            Password
+                        </label>
                         <div class="relative">
-                            <div class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
-                                <i data-lucide="lock" class="w-4 h-4"></i>
-                            </div>
                             <input 
                                 type="password" 
                                 id="password" 
                                 name="password"
-                                class="flex h-10 w-full rounded-md border border-input bg-background pl-10 pr-10 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 theme-transition"
+                                class="flex h-12 w-full rounded-md border border-input bg-background px-3 pr-12 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 theme-transition"
                                 placeholder="••••••••"
                                 required
                             >
                             <button 
                                 type="button"
                                 id="toggle-password"
-                                class="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground theme-transition"
+                                class="absolute right-1 top-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-md h-10 w-10 text-muted-foreground hover:text-foreground hover:bg-accent theme-transition focus:outline-none focus:ring-2 focus:ring-ring"
                             >
-                                <i data-lucide="eye" class="w-4 h-4 show-password"></i>
-                                <i data-lucide="eye-off" class="w-4 h-4 hide-password hidden"></i>
+                                <i data-lucide="eye" class="w-5 h-5 show-password"></i>
+                                <i data-lucide="eye-off" class="w-5 h-5 hide-password hidden"></i>
                             </button>
                         </div>
-                    </div>
-
-                    <!-- Remember Me -->
-                    <div class="flex items-center space-x-2">
-                        <input 
-                            type="checkbox" 
-                            id="remember" 
-                            name="remember"
-                            class="h-4 w-4 rounded border-input text-primary focus:ring-2 focus:ring-ring focus:ring-offset-2"
-                        >
-                        <label for="remember" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                            Remember me
-                        </label>
                     </div>
 
                     <!-- Submit Button -->
                     <button 
                         type="submit"
-                        class="w-full inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 theme-transition"
+                        class="w-full inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-12 px-4 py-2 theme-transition"
                     >
-                        <i data-lucide="log-in" class="w-4 h-4 mr-2"></i>
-                        Sign in
+                        Sign Up
                     </button>
                 </form>
 
-                <!-- Divider -->
-                <div class="relative my-6">
-                    <div class="absolute inset-0 flex items-center">
-                        <span class="w-full border-t border-border"></span>
-                    </div>
-                    <div class="relative flex justify-center text-xs uppercase">
-                        <span class="bg-card px-2 text-muted-foreground">Or continue with</span>
-                    </div>
-                </div>
-
-                <!-- Social Login Buttons -->
-                <div class="grid grid-cols-2 gap-4">
-                    <button 
-                        type="button"
-                        class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 theme-transition"
-                    >
-                        <i data-lucide="github" class="w-4 h-4 mr-2"></i>
-                        GitHub
-                    </button>
-                    <button 
-                        type="button"
-                        class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 theme-transition"
-                    >
-                        <i data-lucide="chrome" class="w-4 h-4 mr-2"></i>
-                        Google
-                    </button>
-                </div>
-
-                <!-- Sign Up Link -->
+                <!-- Sign In Link -->
                 <div class="mt-6 text-center text-sm">
-                    <span class="text-muted-foreground">Don't have an account? </span>
-                    <a href="#" class="text-primary hover:underline font-medium">
-                        Sign up
+                    <span class="text-muted-foreground">Have an account? </span>
+                    <a href="#" class="text-foreground hover:underline font-medium underline">
+                        Sign In Now
                     </a>
                 </div>
             </div>
 
             <!-- Footer Info -->
-            <p class="mt-8 text-center text-xs text-muted-foreground">
-                By signing in, you agree to our 
+            <p class="mt-8 text-center text-xs text-muted-foreground leading-relaxed">
+                By continuing, you agree to Supabase's 
                 <a href="#" class="hover:text-foreground underline">Terms of Service</a> 
                 and 
-                <a href="#" class="hover:text-foreground underline">Privacy Policy</a>
+                <a href="#" class="hover:text-foreground underline">Privacy Policy</a>, and to receive periodic emails with updates.
             </p>
         </div>
     </main>
@@ -289,15 +253,14 @@
         });
 
         // Form submission handler
-        const loginForm = document.getElementById('login-form');
-        loginForm.addEventListener('submit', (e) => {
+        const signupForm = document.getElementById('signup-form');
+        signupForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
-            const remember = document.getElementById('remember').checked;
             
-            console.log('Login attempt:', { email, password: '***', remember });
-            alert('Login form submitted! Check console for details.');
+            console.log('Sign up attempt:', { email, password: '***' });
+            alert('Sign up form submitted! Check console for details.');
             
             // In a real application, you would send this data to your backend
         });

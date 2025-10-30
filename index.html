@@ -1,1 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zink - Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        border: "hsl(var(--border))",
+                        input: "hsl(var(--input))",
+                        ring: "hsl(var(--ring))",
+                        background: "hsl(var(--background))",
+                        foreground: "hsl(var(--foreground))",
+                        primary: {
+                            DEFAULT: "hsl(var(--primary))",
+                            foreground: "hsl(var(--primary-foreground))",
+                        },
+                        secondary: {
+                            DEFAULT: "hsl(var(--secondary))",
+                            foreground: "hsl(var(--secondary-foreground))",
+                        },
+                        muted: {
+                            DEFAULT: "hsl(var(--muted))",
+                            foreground: "hsl(var(--muted-foreground))",
+                        },
+                        accent: {
+                            DEFAULT: "hsl(var(--accent))",
+                            foreground: "hsl(var(--accent-foreground))",
+                        },
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --background: 0 0% 100%;
+            --foreground: 0 0% 3.9%;
+            --card: 0 0% 100%;
+            --card-foreground: 0 0% 3.9%;
+            --popover: 0 0% 100%;
+            --popover-foreground: 0 0% 3.9%;
+            --primary: 0 0% 9%;
+            --primary-foreground: 0 0% 98%;
+            --secondary: 0 0% 96.1%;
+            --secondary-foreground: 0 0% 9%;
+            --muted: 0 0% 96.1%;
+            --muted-foreground: 0 0% 45.1%;
+            --accent: 0 0% 96.1%;
+            --accent-foreground: 0 0% 9%;
+            --destructive: 0 84.2% 60.2%;
+            --destructive-foreground: 0 0% 98%;
+            --border: 0 0% 89.8%;
+            --input: 0 0% 89.8%;
+            --ring: 0 0% 3.9%;
+            --radius: 0.5rem;
+        }
 
+        .dark {
+            --background: 0 0% 3.9%;
+            --foreground: 0 0% 98%;
+            --card: 0 0% 3.9%;
+            --card-foreground: 0 0% 98%;
+            --popover: 0 0% 3.9%;
+            --popover-foreground: 0 0% 98%;
+            --primary: 0 0% 98%;
+            --primary-foreground: 0 0% 9%;
+            --secondary: 0 0% 14.9%;
+            --secondary-foreground: 0 0% 98%;
+            --muted: 0 0% 14.9%;
+            --muted-foreground: 0 0% 63.9%;
+            --accent: 0 0% 14.9%;
+            --accent-foreground: 0 0% 98%;
+            --destructive: 0 62.8% 30.6%;
+            --destructive-foreground: 0 0% 98%;
+            --border: 0 0% 14.9%;
+            --input: 0 0% 14.9%;
+            --ring: 0 0% 83.1%;
+        }
+
+        * {
+            border-color: hsl(var(--border));
+        }
+
+        body {
+            background-color: hsl(var(--background));
+            color: hsl(var(--foreground));
+        }
+
+        .theme-transition {
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+    </style>
+</head>
+<body class="theme-transition min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="border-b border-border theme-transition">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <i data-lucide="box" class="w-6 h-6"></i>
+                <h1 class="text-2xl font-bold">Zink</h1>
+            </div>
+            <button 
+                id="theme-toggle" 
+                class="p-2 rounded-md hover:bg-accent theme-transition focus:outline-none focus:ring-2 focus:ring-ring"
+                aria-label="Toggle theme"
+            >
+                <i data-lucide="sun" class="w-5 h-5 dark:hidden"></i>
+                <i data-lucide="moon" class="w-5 h-5 hidden dark:block"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex items-center justify-center p-4">
+        <div class="w-full max-w-md">
+            <!-- Login Card -->
+            <div class="bg-card border border-border rounded-lg shadow-lg p-8 theme-transition">
+                <div class="mb-8 text-center">
+                    <h2 class="text-3xl font-bold mb-2">Welcome back</h2>
+                    <p class="text-muted-foreground text-sm">Enter your credentials to sign in to your account</p>
+                </div>
+
+                <form id="login-form" class="space-y-6">
+                    <!-- Email Field -->
+                    <div class="space-y-2">
+                        <label for="email" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                            Email
+                        </label>
+                        <div class="relative">
+                            <div class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+                                <i data-lucide="mail" class="w-4 h-4"></i>
+                            </div>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email"
+                                class="flex h-10 w-full rounded-md border border-input bg-background pl-10 pr-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 theme-transition"
+                                placeholder="name@example.com"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Password Field -->
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <label for="password" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                                Password
+                            </label>
+                            <a href="#" class="text-sm text-primary hover:underline">
+                                Forgot password?
+                            </a>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+                                <i data-lucide="lock" class="w-4 h-4"></i>
+                            </div>
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password"
+                                class="flex h-10 w-full rounded-md border border-input bg-background pl-10 pr-10 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 theme-transition"
+                                placeholder="••••••••"
+                                required
+                            >
+                            <button 
+                                type="button"
+                                id="toggle-password"
+                                class="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground theme-transition"
+                            >
+                                <i data-lucide="eye" class="w-4 h-4 show-password"></i>
+                                <i data-lucide="eye-off" class="w-4 h-4 hide-password hidden"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Remember Me -->
+                    <div class="flex items-center space-x-2">
+                        <input 
+                            type="checkbox" 
+                            id="remember" 
+                            name="remember"
+                            class="h-4 w-4 rounded border-input text-primary focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                        >
+                        <label for="remember" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                            Remember me
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button 
+                        type="submit"
+                        class="w-full inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 theme-transition"
+                    >
+                        <i data-lucide="log-in" class="w-4 h-4 mr-2"></i>
+                        Sign in
+                    </button>
+                </form>
+
+                <!-- Divider -->
+                <div class="relative my-6">
+                    <div class="absolute inset-0 flex items-center">
+                        <span class="w-full border-t border-border"></span>
+                    </div>
+                    <div class="relative flex justify-center text-xs uppercase">
+                        <span class="bg-card px-2 text-muted-foreground">Or continue with</span>
+                    </div>
+                </div>
+
+                <!-- Social Login Buttons -->
+                <div class="grid grid-cols-2 gap-4">
+                    <button 
+                        type="button"
+                        class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 theme-transition"
+                    >
+                        <i data-lucide="github" class="w-4 h-4 mr-2"></i>
+                        GitHub
+                    </button>
+                    <button 
+                        type="button"
+                        class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 theme-transition"
+                    >
+                        <i data-lucide="chrome" class="w-4 h-4 mr-2"></i>
+                        Google
+                    </button>
+                </div>
+
+                <!-- Sign Up Link -->
+                <div class="mt-6 text-center text-sm">
+                    <span class="text-muted-foreground">Don't have an account? </span>
+                    <a href="#" class="text-primary hover:underline font-medium">
+                        Sign up
+                    </a>
+                </div>
+            </div>
+
+            <!-- Footer Info -->
+            <p class="mt-8 text-center text-xs text-muted-foreground">
+                By signing in, you agree to our 
+                <a href="#" class="hover:text-foreground underline">Terms of Service</a> 
+                and 
+                <a href="#" class="hover:text-foreground underline">Privacy Policy</a>
+            </p>
+        </div>
+    </main>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Theme management
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            html.classList.add('dark');
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            const theme = html.classList.contains('dark') ? 'dark' : 'light';
+            localStorage.setItem('theme', theme);
+            
+            // Reinitialize icons after theme change
+            setTimeout(() => lucide.createIcons(), 50);
+        });
+
+        // Password visibility toggle
+        const togglePassword = document.getElementById('toggle-password');
+        const passwordInput = document.getElementById('password');
+        const showPasswordIcon = togglePassword.querySelector('.show-password');
+        const hidePasswordIcon = togglePassword.querySelector('.hide-password');
+
+        togglePassword.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            showPasswordIcon.classList.toggle('hidden');
+            hidePasswordIcon.classList.toggle('hidden');
+        });
+
+        // Form submission handler
+        const loginForm = document.getElementById('login-form');
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const remember = document.getElementById('remember').checked;
+            
+            console.log('Login attempt:', { email, password: '***', remember });
+            alert('Login form submitted! Check console for details.');
+            
+            // In a real application, you would send this data to your backend
+        });
+    </script>
+</body>
+</html>
